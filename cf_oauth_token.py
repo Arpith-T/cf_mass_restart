@@ -1,9 +1,14 @@
 import subprocess
+import os
+import dotenv
+
+dotenv.load_dotenv(".env")
+
+PASSWORD = os.environ["PASSWORD"]
 
 
 def aciat001_oauth_token():
-    login = subprocess.run('cf login -a https://api.cf.sap.hana.ondemand.com -o "CPI-Global-Canary_aciat001"  -s '
-                           'prov_eu10_aciat001 -u prism@global.corp.sap -p Prisminfra529#5')
+    login = subprocess.run(f'cf login -a https://api.cf.sap.hana.ondemand.com -o "CPI-Global-Canary_aciat001"  -s prov_eu10_aciat001 -u prism@global.corp.sap -p {PASSWORD}')
     # print(login)
 
     oauth_token = subprocess.run("cf oauth-token", stdout=subprocess.PIPE)
